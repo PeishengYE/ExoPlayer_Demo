@@ -15,7 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.radioyps.videoyep.exoplayeryeptest"
+    package="com.radioyps.exoplayer"
     android:versionCode="2200"
     android:versionName="2.2.0">
 
@@ -31,9 +31,9 @@
       android:banner="@drawable/ic_banner"
       android:largeHeap="true"
       android:allowBackup="false"
-      android:name="com.radioyps.videoyep.exoplayeryeptest.DemoApplication">
+      android:name="com.radioyps.exoplayer.DemoApplication">
 
-    <activity android:name="com.radioyps.videoyep.exoplayeryeptest.SampleChooserActivity"
+    <activity android:name="com.radioyps.exoplayer.SampleChooserActivity"
         android:configChanges="keyboardHidden"
         android:label="@string/application_name">
       <intent-filter>
@@ -55,13 +55,13 @@
       </intent-filter>
     </activity>
 
-    <activity android:name="com.radioyps.videoyep.exoplayeryeptest.PlayerActivity"
+    <activity android:name="com.radioyps.exoplayer.PlayerActivity"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
         android:launchMode="singleTop"
         android:label="@string/application_name"
         android:theme="@style/PlayerTheme">
       <intent-filter>
-        <action android:name="com.google.android.exoplayer.demo.action.VIEW"/>
+        <action android:name="com.radioyps.exoplayer.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <data android:scheme="http"/>
         <data android:scheme="https"/>
@@ -70,7 +70,7 @@
         <data android:scheme="file"/>
       </intent-filter>
       <intent-filter>
-        <action android:name="com.google.android.exoplayer.demo.action.VIEW_LIST"/>
+        <action android:name="com.radioyps.exoplayer.action.VIEW_LIST"/>
         <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
     </activity>

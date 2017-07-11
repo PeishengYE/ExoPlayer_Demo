@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.radioyps.videoyep.exoplayeryeptest;
+package com.radioyps.exoplayer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -63,8 +63,11 @@ public class SampleChooserActivity extends Activity {
     String dataUri = intent.getDataString();
     String[] uris;
     if (dataUri != null) {
+
       uris = new String[] {dataUri};
+
     } else {
+
       ArrayList<String> uriList = new ArrayList<>();
       AssetManager assetManager = getAssets();
       try {
@@ -80,6 +83,7 @@ public class SampleChooserActivity extends Activity {
       uris = new String[uriList.size()];
       uriList.toArray(uris);
       Arrays.sort(uris);
+
     }
     SampleListLoader loaderTask = new SampleListLoader();
     loaderTask.execute(uris);
