@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -72,6 +73,7 @@ import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -249,6 +251,25 @@ public class PlayerActivity extends Activity implements OnClickListener, ExoPlay
     return file;
   }
 
+ private String getVideoUri(){
+   StringBuilder sb = new StringBuilder();
+  AssetManager assetManager = getAssets();
+  try {
+    for (String asset : assetManager.list("")) {
+      if (asset.endsWith(".mp4")) {
+        sb.append("asset:///" + asset);
+        break;
+      }
+    }
+  } catch (IOException e) {
+    Toast.makeText(getApplicationContext(), R.string.local_mp4_load_error, Toast.LENGTH_LONG)
+            .show();
+  }
+
+   return sb.toString();
+
+ }
+
   private void initializePlayer() {
     Intent intent = getIntent();
     if (player == null) {
@@ -324,8 +345,11 @@ public class PlayerActivity extends Activity implements OnClickListener, ExoPlay
           extensions = new String[uriStrings.length];
         }
       } else {
-        showToast(getString(R.string.unexpected_intent_action, action));
-        return;
+//        showToast(getString(R.string.unexpected_intent_action, action));
+//        return;
+          uris = new Uri[] {Uri.parse(getVideoUri())};
+          extensions = new String[] {intent.getStringExtra(EXTENSION_EXTRA)};
+          showToast("Playing Video Test FIle: " + getVideoUri());
       }
       if (Util.maybeRequestReadExternalStoragePermission(this, uris)) {
         // The player will be reinitialized if the permission is granted.

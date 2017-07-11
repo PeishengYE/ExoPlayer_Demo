@@ -57,5 +57,6 @@
   <string name="storage_permission_denied">Permission to access storage was denied</string>
 
   <string name="sample_list_load_error">One or more sample lists failed to load</string>
+  <string name="local_mp4_load_error">mp4 in assets not found</string>
 
 </resources>
