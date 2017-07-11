@@ -16,12 +16,15 @@
 package com.radioyps.exoplayer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -67,6 +70,8 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
+
+import java.io.File;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -79,7 +84,7 @@ import java.util.UUID;
  */
 public class PlayerActivity extends Activity implements OnClickListener, ExoPlayer.EventListener,
     PlaybackControlView.VisibilityListener {
-
+  private static final String LOG_TAG = PlayerActivity.class.getSimpleName();
   public static final String DRM_SCHEME_UUID_EXTRA = "drm_scheme_uuid";
   public static final String DRM_LICENSE_URL = "drm_license_url";
   public static final String DRM_KEY_REQUEST_PROPERTIES = "drm_key_request_properties";
@@ -142,6 +147,7 @@ public class PlayerActivity extends Activity implements OnClickListener, ExoPlay
     simpleExoPlayerView = (SimpleExoPlayerView) findViewById(R.id.player_view);
     simpleExoPlayerView.setControllerVisibilityListener(this);
     simpleExoPlayerView.requestFocus();
+    makeReadableStorageDir(this, "test_video");
   }
 
   @Override
@@ -227,7 +233,21 @@ public class PlayerActivity extends Activity implements OnClickListener, ExoPlay
     debugRootView.setVisibility(visibility);
   }
 
+
+
   // Internal methods
+
+  public File makeReadableStorageDir(Context context, String dirName) {
+    // Get the directory for the app's private pictures directory.
+    File file = new File(context.getExternalFilesDir(
+            Environment.DIRECTORY_MOVIES), dirName);
+    if (!file.mkdirs()) {
+      Log.e(LOG_TAG, "Directory not created");
+    }
+      Log.i(LOG_TAG, "Dir Movies Name: " + Environment.DIRECTORY_MOVIES);
+      Log.i(LOG_TAG, "created Dir Name: " + dirName);
+    return file;
+  }
 
   private void initializePlayer() {
     Intent intent = getIntent();

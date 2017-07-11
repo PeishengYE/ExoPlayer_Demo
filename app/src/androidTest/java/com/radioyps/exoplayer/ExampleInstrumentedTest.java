@@ -1,4 +1,4 @@
-package com.radioyps.videoyep.exoplayeryeptest;
+package com.radioyps.exoplayer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.radioyps.videoyep.exoplayeryeptest", appContext.getPackageName());
+        assertEquals("com.radioyps.exoplayer", appContext.getPackageName());
     }
 }

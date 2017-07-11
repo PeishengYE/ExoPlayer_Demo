@@ -1,4 +1,4 @@
-package com.radioyps.videoyep.exoplayeryeptest;
+package com.radioyps.exoplayer;
 
 import org.junit.Test;
 
